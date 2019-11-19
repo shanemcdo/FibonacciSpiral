@@ -42,7 +42,7 @@ return false;
 
 void DrawFib()
 {
-	const double minlength = 0.001;
+	const double minlength = 0.001;//side length of first triangle
 	int counter = 0;
 	//starting square
 	coord point[4];
