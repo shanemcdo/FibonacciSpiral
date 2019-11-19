@@ -4,14 +4,9 @@
 struct coord{
 	double x;
 	double y;
-} point[4];
-
-bool first = true;
+};
 
 //starting sequence
-double prevlength[3] = {0, 0.01, 0};
-
-
 
 char direction[4] = {'r','d','l','u'};
 int counter = 0;
@@ -38,58 +33,61 @@ void HolQuad(coord point1, coord point2, coord point3, coord point4)
 
 void DrawFib()
 {
-	if(first)
-	{
-		//starting square
-		point[0].x = 0.01;
-		point[0].y = 0.01;
-		point[1].x = -0.01;
-		point[1].y = 0.01;
-		point[2].x = -0.01;
-		point[2].y = -0.01;
-		point[3].x = 0.01;
-		point[3].y = -0.01;
-		first = false;
-	}//if first
+	//starting square
+	coord point[4];
+	point[0].x = 0.01;
+	point[0].y = 0.01;
+	point[1].x = -0.01;
+	point[1].y = 0.01;
+	point[2].x = -0.01;
+	point[2].y = -0.01;
+	point[3].x = 0.01;
+	point[3].y = -0.01;
+
+	double prevlength[3] = {0, 0.02, 0};
+	
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-	
-	HolQuad(point[0], point[1], point[2], point[3]);
+	for(int i = 0; i <  10; i++)
+	{
+		HolQuad(point[0], point[1], point[2], point[3]);
 
-	prevlength[2] = prevlength[0] + prevlength[1];
-	prevlength[0] = prevlength[1];
-	prevlength[1] = prevlength[2];
-	
-	if(direction[counter%4] == 'r')
-	{
-		for(int i = 0; i < 4; i++)
+		prevlength[2] = prevlength[0] + prevlength[1];
+		prevlength[0] = prevlength[1];
+		prevlength[1] = prevlength[2];
+		
+		//change position of square
+		if(direction[counter%4] == 'r')
 		{
-			point[i].x += prevlength[1];
-		}//for i
-	}//if r
-	if(direction[counter%4] == 'd')
-	{
-		for(int i = 0; i < 4; i++)
+			for(int i = 0; i < 4; i++)
+			{
+				point[i].x += prevlength[1];
+			}//for i
+		}//if r
+		if(direction[counter%4] == 'd')
 		{
-			point[i].y -= prevlength[1];
-		}//for i
-	}//if d
-	if(direction[counter%4] == 'l')
-	{
-		for(int i = 0; i < 4; i++)
+			for(int i = 0; i < 4; i++)
+			{
+				point[i].y -= prevlength[1];
+			}//for i
+		}//if d
+		if(direction[counter%4] == 'l')
 		{
-			point[i].x -= prevlength[1];
-		}//for i
-	}//if l
-	if(direction[counter%4] == 'u')
-	{
-		for(int i = 0; i < 4; i++)
+			for(int i = 0; i < 4; i++)
+			{
+				point[i].x -= prevlength[1];
+			}//for i
+		}//if l
+		if(direction[counter%4] == 'u')
 		{
-			point[i].y += prevlength[1];
-		}//for i
-	}//if u
+			for(int i = 0; i < 4; i++)
+			{
+				point[i].y += prevlength[1];
+			}//for i
+		}//if u
 
-	counter++;
-	Sleep(500);
+		counter++;
+		Sleep(500);
+	}
 	glutSwapBuffers();
 }//DrawFib
 
