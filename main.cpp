@@ -6,7 +6,6 @@ struct coord{
 	double y;
 };
 
-//starting sequence
 
 char direction[4] = {'r','d','l','u'};
 
@@ -31,33 +30,45 @@ void HolQuad(coord point1, coord point2, coord point3, coord point4)
 	glEnd();
 }//HolQuad
 
+bool under1(coord arr[])
+{
+	for(int i = 0; i < 4; i++)
+	{
+		if(arr[i].x < 1 || arr[i].y < 1)
+			return true;
+	}//for i
+return false;
+}//under1
+
 void DrawFib()
 {
+	const double minlength = 0.001;
 	int counter = 0;
 	//starting square
 	coord point[4];
-	point[0].x = 0.01;
-	point[0].y = 0.01;
-	point[1].x = -0.01;
-	point[1].y = 0.01;
-	point[2].x = -0.01;
-	point[2].y = -0.01;
-	point[3].x = 0.01;
-	point[3].y = -0.01;
+	point[0].x = minlength;
+	point[0].y = minlength;
+	point[1].x = -minlength;
+	point[1].y = minlength;
+	point[2].x = -minlength;
+	point[2].y = -minlength;
+	point[3].x = minlength;
+	point[3].y = -minlength;
 
-	double prevlength[3] = {0, 0.02, 0};
+	//starting sequence
+	double prevlength[3] = {0, minlength * 2, 0};
 	
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-	for(int i = 0; i <  10; i++)
+	while(under1(point))
 	{
 		HolQuad(point[0], point[1], point[2], point[3]);
-
 		
 		//change position of square
 		if(direction[counter%4] == 'r')
 		{
 			for(int i = 0; i < 4; i++)
 			{
+				
 				point[i].x += prevlength[1];
 			}//for i
 			point[2].y -= prevlength[0];
@@ -103,7 +114,7 @@ void DrawFib()
 		prevlength[0] = prevlength[1];
 		prevlength[1] = prevlength[2];
 		counter++;
-	}
+	}//while(under1)
 	glutSwapBuffers();
 }//DrawFib
 
