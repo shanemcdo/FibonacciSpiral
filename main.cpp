@@ -9,7 +9,7 @@ struct coord{
 //starting sequence
 
 char direction[4] = {'r','d','l','u'};
-int counter = 0;
+
 
 void HolQuad(coord point1, coord point2, coord point3, coord point4)
 {
@@ -33,6 +33,7 @@ void HolQuad(coord point1, coord point2, coord point3, coord point4)
 
 void DrawFib()
 {
+	int counter = 0;
 	//starting square
 	coord point[4];
 	point[0].x = 0.01;
@@ -51,9 +52,6 @@ void DrawFib()
 	{
 		HolQuad(point[0], point[1], point[2], point[3]);
 
-		prevlength[2] = prevlength[0] + prevlength[1];
-		prevlength[0] = prevlength[1];
-		prevlength[1] = prevlength[2];
 		
 		//change position of square
 		if(direction[counter%4] == 'r')
@@ -62,31 +60,49 @@ void DrawFib()
 			{
 				point[i].x += prevlength[1];
 			}//for i
+			point[2].y -= prevlength[0];
+			point[3].y -= prevlength[0];
+			point[0].x += prevlength[0];
+			point[3].x += prevlength[0];
 		}//if r
-		if(direction[counter%4] == 'd')
+		else if(direction[counter%4] == 'd')
 		{
 			for(int i = 0; i < 4; i++)
 			{
 				point[i].y -= prevlength[1];
 			}//for i
+			point[2].y -= prevlength[0];
+			point[3].y -= prevlength[0];
+			point[1].x -= prevlength[0];
+			point[2].x -= prevlength[0];
 		}//if d
-		if(direction[counter%4] == 'l')
+		else if(direction[counter%4] == 'l')
 		{
 			for(int i = 0; i < 4; i++)
 			{
 				point[i].x -= prevlength[1];
 			}//for i
+			point[0].y += prevlength[0];
+			point[1].y += prevlength[0];
+			point[1].x -= prevlength[0];
+			point[2].x -= prevlength[0];
 		}//if l
-		if(direction[counter%4] == 'u')
+		else if(direction[counter%4] == 'u')
 		{
 			for(int i = 0; i < 4; i++)
 			{
 				point[i].y += prevlength[1];
 			}//for i
+			point[0].y += prevlength[0];
+			point[1].y += prevlength[0];
+			point[0].x += prevlength[0];
+			point[3].x += prevlength[0];
 		}//if u
 
+		prevlength[2] = prevlength[0] + prevlength[1];
+		prevlength[0] = prevlength[1];
+		prevlength[1] = prevlength[2];
 		counter++;
-		Sleep(500);
 	}
 	glutSwapBuffers();
 }//DrawFib
@@ -98,7 +114,7 @@ int main(int argc, char *argv[])
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition ( 0, 0 ) ;
-	glutInitWindowSize ( 700, 700 ) ;
+	glutInitWindowSize ( 650, 650 ) ;
 	glutCreateWindow( "Fibonacci Spiral" );
 
 	//functions
