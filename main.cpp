@@ -1,5 +1,4 @@
 #include<GL/glut.h>
-#include<windows.h>
 
 struct coord{
 	double x;
