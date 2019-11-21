@@ -7,6 +7,13 @@ struct coord{
 
 double zoomnum = 1;
 
+void curve(coord point1, coord point2)
+{
+	glBegin(GL_LINES);
+		glVertex2d(point1.x, point1.y);	
+		glVertex2d(point2.x, point2.y);	
+	glEnd();
+}//curve
 
 void HolQuad(coord point1, coord point2, coord point3, coord point4)//print 4 lines in a quadralateral corripoding to the 4 points
 {
@@ -61,14 +68,11 @@ void DrawFib()
 	while(under1(point))
 	{
 		HolQuad(point[0], point[1], point[2], point[3]);
-		glBegin(GL_LINES);
-			glVertex2d(point[2].x, point[2].y);	
-			glVertex2d(point[0].x, point[0].y);	
-		glEnd();
 		
 		//change position and size of square
 		if(direction[counter%4] == 'r')
 		{
+			curve(point[2], point[0]);
 			for(int i = 0; i < 4; i++)
 			{
 				
@@ -81,6 +85,7 @@ void DrawFib()
 		}//if r
 		else if(direction[counter%4] == 'd')
 		{
+			curve(point[1], point[3]);
 			for(int i = 0; i < 4; i++)
 			{
 				point[i].y -= prevlength[1];
@@ -92,6 +97,7 @@ void DrawFib()
 		}//if d
 		else if(direction[counter%4] == 'l')
 		{
+			curve(point[2], point[0]);
 			for(int i = 0; i < 4; i++)
 			{
 				point[i].x -= prevlength[1];
@@ -103,6 +109,7 @@ void DrawFib()
 		}//if l
 		else if(direction[counter%4] == 'u')
 		{
+			curve(point[1], point[3]);
 			for(int i = 0; i < 4; i++)
 			{
 				point[i].y += prevlength[1];
