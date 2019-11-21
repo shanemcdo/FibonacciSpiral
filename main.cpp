@@ -117,8 +117,8 @@ void DrawFib()
 		counter++;
 	}//while(under1)
 
-	zoomnum *= 0.999;
-	if(zoomnum <=  0.6180339887498948482046 / 4)
+	zoomnum /= 0.999;
+	if(zoomnum <= 5/34)
 		zoomnum = 1;
 
 
