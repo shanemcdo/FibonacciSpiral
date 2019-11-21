@@ -5,11 +5,10 @@ struct coord{
 	double y;
 };
 
+double zoomnum = 1;
 
-char direction[4] = {'r','d','l','u'};
 
-
-void HolQuad(coord point1, coord point2, coord point3, coord point4)
+void HolQuad(coord point1, coord point2, coord point3, coord point4)//print 4 lines in a quadralateral corripoding to the 4 points
 {
 	glBegin(GL_LINES);
 		glVertex2d(point1.x, point1.y);
@@ -39,10 +38,9 @@ bool under1(coord arr[])
 return false;
 }//under1
 
-double zoomnum = 1;
-
 void DrawFib()
 {
+	char direction[4] = {'r','d','l','u'};
 	double minlength = 0.0005 / zoomnum;//side length of first triangle
 	int counter = 0;
 	//starting square
@@ -64,7 +62,7 @@ void DrawFib()
 	{
 		HolQuad(point[0], point[1], point[2], point[3]);
 		
-		//change position of square
+		//change position and size of square
 		if(direction[counter%4] == 'r')
 		{
 			for(int i = 0; i < 4; i++)
@@ -111,16 +109,17 @@ void DrawFib()
 			point[3].x += prevlength[0];
 		}//if u
 
-		prevlength[2] = prevlength[0] + prevlength[1];
+		prevlength[2] = prevlength[0] + prevlength[1]; //set length of squares
 		prevlength[0] = prevlength[1];
 		prevlength[1] = prevlength[2];
 		counter++;
 	}//while(under1)
 
 	zoomnum *= 0.999;
-	if(zoomnum <= 0.14705882352)
+	if(zoomnum <= 0.14705882352)//one full loop around the square
+	{
 		zoomnum = 1;
-
+	}//if
 
 	glutSwapBuffers();
 }//DrawFib
@@ -132,7 +131,7 @@ int main(int argc, char *argv[])
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition ( 0, 0 ) ;
-	glutInitWindowSize ( 650, 650 ) ;
+	glutInitWindowSize ( 675, 675 ) ;
 	glutCreateWindow( "Fibonacci Spiral" );
 
 	//functions
