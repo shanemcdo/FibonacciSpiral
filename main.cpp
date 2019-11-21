@@ -6,6 +6,7 @@ struct coord{
 };
 
 double zoomnum = 1;
+char direction[4] = {'r','d','l','u'};
 
 void curve(coord point1, coord point2)
 {
@@ -15,8 +16,37 @@ void curve(coord point1, coord point2)
 	glEnd();
 }//curve
 
-void HolQuad(coord point1, coord point2, coord point3, coord point4)//print 4 lines in a quadralateral corripoding to the 4 points
+void HolQuad(coord point1, coord point2, coord point3, coord point4, int num)//print 4 lines in a quadralateral corrioding to the 4 points
 {
+	
+
+	//change color
+	if(direction[num%4] == 'r')
+	{
+		glColor3f(1.0f, 0.0f, 0.0f);//color 1
+	}//if r
+	else if(direction[num%4] == 'd')
+	{
+		glColor3f(0.0f, 1.0f, 0.0f);//color 2
+	}//if d
+	else if(direction[num%4] == 'l')
+	{
+		glColor3f(0.0f, 0.0f, 1.0f);//color 3
+	}//if l
+	else if(direction[num%4] == 'u')
+	{
+		glColor3f(0.0f, 0.0f, 0.0f);//color 4
+	}//if u
+
+
+	glBegin(GL_QUADS);
+		glVertex2d(point1.x, point1.y);
+		glVertex2d(point2.x, point2.y);
+		glVertex2d(point3.x, point3.y);
+		glVertex2d(point4.x, point4.y);
+	glEnd();
+	glColor3f(1.0f, 1.0f, 1.0f);
+	
 	glBegin(GL_LINES);
 		glVertex2d(point1.x, point1.y);
 		glVertex2d(point2.x, point2.y);
@@ -47,7 +77,6 @@ return false;
 
 void DrawFib()
 {
-	char direction[4] = {'r','d','l','u'};
 	double minlength = 0.0005 / zoomnum;//side length of first triangle
 	int counter = 0;
 	//starting square
@@ -67,7 +96,7 @@ void DrawFib()
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 	while(under1(point))
 	{
-		HolQuad(point[0], point[1], point[2], point[3]);
+		HolQuad(point[0], point[1], point[2], point[3], counter);
 		
 		//change position and size of square
 		if(direction[counter%4] == 'r')
