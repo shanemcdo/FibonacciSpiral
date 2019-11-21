@@ -39,9 +39,11 @@ bool under1(coord arr[])
 return false;
 }//under1
 
+double zoomnum = 1;
+
 void DrawFib()
 {
-	const double minlength = 0.001;//side length of first triangle
+	double minlength = 0.0005 / zoomnum;//side length of first triangle
 	int counter = 0;
 	//starting square
 	coord point[4];
@@ -114,6 +116,12 @@ void DrawFib()
 		prevlength[1] = prevlength[2];
 		counter++;
 	}//while(under1)
+
+	zoomnum *= 0.999;
+	if(zoomnum <=  0.6180339887498948482046 / 4)
+		zoomnum = 1;
+
+
 	glutSwapBuffers();
 }//DrawFib
 
