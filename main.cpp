@@ -61,6 +61,10 @@ void DrawFib()
 	while(under1(point))
 	{
 		HolQuad(point[0], point[1], point[2], point[3]);
+		glBegin(GL_LINES);
+			glVertex2d(point[2].x, point[2].y);	
+			glVertex2d(point[0].x, point[0].y);	
+		glEnd();
 		
 		//change position and size of square
 		if(direction[counter%4] == 'r')
