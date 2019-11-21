@@ -4,6 +4,9 @@
 
 double zoomnum = 1;//how zoomed in it is. ya know.
 char direction[4] = {'r','d','l','u'};//uses counter to tell direction
+//TODO: replace the counter inputs in the functions with just a char.
+// - Make direction a local variable
+// - make curve in a seperate file.
 
 struct coord{//literally the simplest struct.
 	double x;
@@ -316,7 +319,6 @@ void DrawFib()
 
 	glutSwapBuffers();//I do as sample code commands
 }//DrawFib
-
 
 int main(int argc, char *argv[])
 {
