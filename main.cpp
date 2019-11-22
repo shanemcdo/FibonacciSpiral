@@ -23,19 +23,19 @@ void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//
 	//change color (R,G,B) values
 	if(dir == 'r')
 	{
-		glColor3f(0.5f, 0.0f, 0.0f);//color 1
+		glColor3f(0.486f, 0.988f, 0.0f);//color 1
 	}//if r
 	else if(dir == 'd')
 	{
-		glColor3f(0.0f, 0.5f, 0.0f);//color 2
+		glColor3f(0.118f, 0.565f, 1.0f);//color 2
 	}//if d
 	else if(dir == 'l')
 	{
-		glColor3f(0.0f, 0.0f, 0.5f);//color 3
+		glColor3f(1.0f, 0.0f, 1.0f);//color 3
 	}//if l
 	else if(dir == 'u')
 	{
-		glColor3f(0.2f, 0.2f, 0.2f);//color 4
+		glColor3f(1.0f, 0.843f, 0.2f);//color 4
 	}//if u
 
 
@@ -158,7 +158,7 @@ void DrawFib()
 		counter++;//increment
 	}//while(under1)
 
-	zoomnum *= 0.99;//zoom in
+	zoomnum *= 0.97;//zoom in
 	if(zoomnum <= 0.14705882352)//if one square has become the same size as the next biggest of the same color
 	{
 		zoomnum = 1;// reset scale
