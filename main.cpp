@@ -3,10 +3,15 @@
 #include<math.h>
 
 double zoomnum = 1;//how zoomed in it is. ya know.
-//TODO: replace the counter inputs in the functions with just a char.
-// - Make direction a local variable
-// - make curve in a seperate file.
+int choice;
 
+void input()
+{
+	std::cout << std::endl << "Fibonacci Spiral" << std::endl;
+	std::cout << "1. Zoom out" << std::endl;
+	std::cout << "2. Zoom in" << std::endl;
+	std::cin >> choice;
+}//input
 
 struct coord{//literally the simplest struct.
 	double x;
@@ -78,7 +83,17 @@ return false;
 
 void DrawFib()
 {
-	double minlength = 0.0005 / zoomnum;//side length of first triangle
+	double minlength;
+
+	if(choice == 1)
+	{
+		minlength = 0.0005 * zoomnum;//side length of first triangle zoom in
+	}//if 1
+	else if (choice == 2)
+	{
+		minlength = 0.0005 / zoomnum;//side length of first triangle zoom out
+	}//else if 2
+
 	int counter = 0;//used to determine direction
 	char direction[4] = {'r','d','l','u'};//uses counter to tell direction
 
@@ -172,6 +187,8 @@ void DrawFib()
 
 int main(int argc, char *argv[])
 {
+	input();
+
 	//initialize
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
