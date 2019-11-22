@@ -15,19 +15,19 @@ void trans(coord a[], char dir, double r)
 		if(dir == 'r')
 		{
 			a[i].x *= -1;
-			a[i].x -= r;
+			a[i].x += r;
 		}//if r
 		else if(dir == 'd')
 		{
 			a[i].y *= -1;
-			a[i].y -= r;
+			a[i].y += r;
 		}//else if d
 		else if(dir == 'l')
 		{
 			a[i].x *= -1;
 			a[i].y *= -1;
-			a[i].x -= r;
-			a[i].y -= r;
+			a[i].x += r;
+			a[i].y += r;
 		}//else if l
 		else if(dir == 'u')
 		{
@@ -65,3 +65,32 @@ void curve(coord point1, coord point2, char dir)
 
 	glLineWidth(1.0f);//line width default
 }//curve
+
+void temp()
+{
+       glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );//I do as the sample code says
+
+       coord point[3];
+       point[0].x = 0;
+       point[0].y = 1;
+       point[1].x = 1;
+       point[1].y = 0;
+
+       curve(point[0], point[1], 'u');
+       curve(point[0], point[1], 'r');
+       curve(point[0], point[1], 'd');
+       curve(point[0], point[1], 'l');
+
+       glBegin(GL_LINES);
+               glVertex2d(0,1);
+               glVertex2d(0,-1);
+       glEnd();
+       glBegin(GL_LINES);
+               glVertex2d(1,0);
+               glVertex2d(-1,0);
+       glEnd();
+
+
+
+       glutSwapBuffers();//I do as sample code commands
+}//temp

@@ -14,6 +14,7 @@ struct coord{//literally the simplest struct.
 };
 
 void curve(coord point1, coord point2, char dir);
+void temp();
 
 void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//print 4 lines in a quadralateral corrioding to the 4 points
 {
@@ -99,7 +100,7 @@ void DrawFib()
 	while(under1(point))
 	{
 		HolQuad(point[0], point[1], point[2], point[3], direction[counter % 4]);
-		curve(point[1], point[3], direction[counter % 4]);
+		//curve(point[1], point[3], direction[counter % 4]);
 		
 		//change position and size of square and also print curve
 		if(direction[counter%4] == 'r')
@@ -177,8 +178,11 @@ int main(int argc, char *argv[])
 	glutCreateWindow( "Fibonacci Spiral" );
 
 	//functions
-	glutDisplayFunc(DrawFib);
-	glutIdleFunc(DrawFib);
+	//glutDisplayFunc(DrawFib);
+	//glutIdleFunc(DrawFib);
+
+	glutDisplayFunc(temp);
+	glutIdleFunc(temp);
 
 	//loop
 	glutMainLoop();
@@ -186,3 +190,4 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
+
