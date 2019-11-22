@@ -100,7 +100,7 @@ void DrawFib()
 	while(under1(point))
 	{
 		HolQuad(point[0], point[1], point[2], point[3], direction[counter % 4]);
-		//curve(point[1], point[3], direction[counter % 4]);
+		curve(point[0], point[2], direction[counter % 4]);
 		
 		//change position and size of square and also print curve
 		if(direction[counter%4] == 'r')
@@ -178,8 +178,8 @@ int main(int argc, char *argv[])
 	glutCreateWindow( "Fibonacci Spiral" );
 
 	//functions
-	//glutDisplayFunc(DrawFib);
-	//glutIdleFunc(DrawFib);
+//	glutDisplayFunc(DrawFib);
+//	glutIdleFunc(DrawFib);
 
 	glutDisplayFunc(temp);
 	glutIdleFunc(temp);

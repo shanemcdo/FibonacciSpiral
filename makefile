@@ -6,3 +6,5 @@ curve.o: curve.cpp
 	g++ curve.cpp -lopenGL32 -lfreeGLUT -c -o curve.o
 c:
 	g++ curve.cpp -o curve.exe -lfreeGLUT -lopenGL32
+test: all
+	test.exe
