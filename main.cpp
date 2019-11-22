@@ -104,6 +104,7 @@ void DrawFib()
 		//change position and size of square and also print curve
 		if(direction[counter%4] == 'r')
 		{
+			curve(point[0], point[1], point[2]);	
 			for(int i = 0; i < 4; i++)
 			{
 				point[i].x += prevlength[1];
@@ -115,6 +116,7 @@ void DrawFib()
 		}//if r
 		else if(direction[counter%4] == 'd')
 		{
+			curve(point[3], point[0], point[1]);	
 			for(int i = 0; i < 4; i++)
 			{
 				point[i].y -= prevlength[1];
@@ -126,6 +128,7 @@ void DrawFib()
 		}//if d
 		else if(direction[counter%4] == 'l')
 		{
+			curve(point[0], point[3], point[2]);	
 			for(int i = 0; i < 4; i++)
 			{
 				point[i].x -= prevlength[1];
@@ -137,6 +140,7 @@ void DrawFib()
 		}//if l
 		else if(direction[counter%4] == 'u')
 		{
+			curve(point[1], point[2], point[3]);	
 			for(int i = 0; i < 4; i++)
 			{
 				point[i].y += prevlength[1];
@@ -154,7 +158,7 @@ void DrawFib()
 		counter++;//increment
 	}//while(under1)
 
-	zoomnum *= 0.999;//zoom in
+	zoomnum *= 0.99;//zoom in
 	if(zoomnum <= 0.14705882352)//if one square has become the same size as the next biggest of the same color
 	{
 		zoomnum = 1;// reset scale

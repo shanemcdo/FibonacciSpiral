@@ -14,8 +14,10 @@ void curve(coord p0, coord p1, coord p2)//p1 is angle p0 and p2 are ends
 	
 	//PRINT CURVE(bezier)
 	coord c, prev;
+	prev.x = p0.x;
+	prev.y = p0.y;
 
-	for(double t = 0; t <= 1; t += 0.01)
+	for(double t = 0; t <= 1.01; t += 0.05)
 	{
 		c.x = (pow((1 - t),2) * p0.x + 2 * (1 - t) * t * p1.x + pow(t, 2) * p2.x);
 		c.y = (pow((1 - t),2) * p0.y + 2 * (1 - t) * t * p1.y + pow(t, 2) * p2.y);
@@ -36,15 +38,15 @@ void curve(coord p0, coord p1, coord p2)//p1 is angle p0 and p2 are ends
 	glLineWidth(1.0f);//line width default
 }//curve
 
-void temp()
+void temp()//I only used this to test my curve functions. not used for final spin
 {
        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );//I do as the sample code says
 
        coord point[3];
        point[0].x = 0;
        point[0].y = 1;
-       point[1].x = 0;
-       point[1].y = 0;
+       point[1].x = 1;
+       point[1].y = 1;
        point[2].x = 1;
        point[2].y = 0;
 
