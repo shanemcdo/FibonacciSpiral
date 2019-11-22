@@ -23,19 +23,19 @@ void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//
 	//change color
 	if(dir == 'r')
 	{
-		glColor3f(1.0f, 0.0f, 0.0f);//color 1 red
+		glColor3f(0.5f, 0.0f, 0.0f);//color 1 red
 	}//if r
 	else if(dir == 'd')
 	{
-		glColor3f(0.0f, 1.0f, 0.0f);//color 2 green
+		glColor3f(0.0f, 0.5f, 0.0f);//color 2 green
 	}//if d
 	else if(dir == 'l')
 	{
-		glColor3f(0.0f, 0.0f, 1.0f);//color 3 blue
+		glColor3f(0.0f, 0.0f, 0.5f);//color 3 blue
 	}//if l
 	else if(dir == 'u')
 	{
-		glColor3f(0.0f, 0.0f, 0.0f);//color 4 black
+		glColor3f(0.2f, 0.2f, 0.2f);//color 4 black
 	}//if u
 
 
