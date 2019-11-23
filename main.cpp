@@ -26,7 +26,7 @@ void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//
 	
 
 	//change color (R,G,B) values
-	if(dir == 'r')
+	if(dir == 'l')
 	{
 		glColor3f(0.486f, 0.988f, 0.0f);//color 1
 	}//if r
@@ -34,7 +34,7 @@ void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//
 	{
 		glColor3f(0.118f, 0.565f, 1.0f);//color 2
 	}//if d
-	else if(dir == 'l')
+	else if(dir == 'r')
 	{
 		glColor3f(1.0f, 0.0f, 1.0f);//color 3
 	}//if l
@@ -95,7 +95,7 @@ void DrawFib()
 	}//else if 2
 
 	int counter = 0;//used to determine direction
-	char direction[4] = {'r','d','l','u'};//uses counter to tell direction
+	char direction[4] = {'l','d','r','u'};//uses counter to tell direction
 
 	//starting square initial points
 	coord point[4];
@@ -117,53 +117,53 @@ void DrawFib()
 		HolQuad(point[0], point[1], point[2], point[3], direction[counter % 4]);
 		
 		//change position and size of square and also print curve
-		if(direction[counter%4] == 'r')
-		{
-			curve(point[0], point[1], point[2]);	
-			for(int i = 0; i < 4; i++)
-			{
-				point[i].x += prevlength[1];
-			}//for i
-			point[2].y -= prevlength[0];
-			point[3].y -= prevlength[0];
-			point[0].x += prevlength[0];
-			point[3].x += prevlength[0];
-		}//if r
-		else if(direction[counter%4] == 'd')
+		if(direction[counter%4] == 'l')
 		{
 			curve(point[3], point[0], point[1]);	
 			for(int i = 0; i < 4; i++)
 			{
-				point[i].y -= prevlength[1];
-			}//for i
-			point[2].y -= prevlength[0];
-			point[3].y -= prevlength[0];
-			point[1].x -= prevlength[0];
-			point[2].x -= prevlength[0];
-		}//if d
-		else if(direction[counter%4] == 'l')
-		{
-			curve(point[0], point[3], point[2]);	
-			for(int i = 0; i < 4; i++)
-			{
 				point[i].x -= prevlength[1];
 			}//for i
-			point[0].y += prevlength[0];
-			point[1].y += prevlength[0];
 			point[1].x -= prevlength[0];
 			point[2].x -= prevlength[0];
-		}//if l
-		else if(direction[counter%4] == 'u')
+			point[2].y -= prevlength[0];
+			point[3].y -= prevlength[0];
+		}//if r
+		else if(direction[counter%4] == 'd')
+		{
+			curve(point[0], point[1], point[2]);	
+			for(int i = 0; i < 4; i++)
+			{
+				point[i].y -= prevlength[1];
+			}//for i
+			point[0].x += prevlength[0];
+			point[3].x += prevlength[0];
+			point[2].y -= prevlength[0];
+			point[3].y -= prevlength[0];
+		}//if d
+		else if(direction[counter%4] == 'r')
 		{
 			curve(point[1], point[2], point[3]);	
 			for(int i = 0; i < 4; i++)
 			{
-				point[i].y += prevlength[1];
+				point[i].x += prevlength[1];
 			}//for i
-			point[0].y += prevlength[0];
-			point[1].y += prevlength[0];
 			point[0].x += prevlength[0];
 			point[3].x += prevlength[0];
+			point[0].y += prevlength[0];
+			point[1].y += prevlength[0];
+		}//if l
+		else if(direction[counter%4] == 'u')
+		{
+			curve(point[2], point[3], point[0]);	
+			for(int i = 0; i < 4; i++)
+			{
+				point[i].y += prevlength[1];
+			}//for i
+			point[1].x -= prevlength[0];
+			point[2].x -= prevlength[0];
+			point[0].y += prevlength[0];
+			point[1].y += prevlength[0];
 		}//if u
 
 		//set length of squares
