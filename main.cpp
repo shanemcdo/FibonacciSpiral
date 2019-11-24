@@ -173,7 +173,7 @@ void DrawFib()
 		counter++;//increment
 	}//while(under1)
 
-	zoomnum *= 0.97;//zoom in
+	zoomnum *= 0.96;//zoom speed
 	if(zoomnum <= 0.14705882352)//if one square has become the same size as the next biggest of the same color
 	{
 		zoomnum = 1;// reset scale
