@@ -4,12 +4,14 @@
 
 double zoomnum = 1;//how zoomed in it is. ya know.
 int choice;
+double speed = 0.96;
 
 void input()
 {
 	std::cout << std::endl << "Fibonacci Spiral" << std::endl;
 	std::cout << "1. Zoom out" << std::endl;
 	std::cout << "2. Zoom in" << std::endl;
+	std::cout << "3. Crazy" << std::endl;
 	std::cin >> choice;
 }//input
 
@@ -84,18 +86,18 @@ return false;
 void DrawFib()
 {
 	double minlength;
+	int counter = 0;//used to determine direction
+	char direction[4] = {'l','d','r','u'};//uses counter to tell direction
 
 	if(choice == 1)
 	{
 		minlength = 0.0005 * zoomnum;//side length of first triangle zoom in
 	}//if 1
-	else if (choice == 2)
+	else if (choice == 2 || choice == 3)
 	{
 		minlength = 0.0005 / zoomnum;//side length of first triangle zoom out
 	}//else if 2
 
-	int counter = 0;//used to determine direction
-	char direction[4] = {'l','d','r','u'};//uses counter to tell direction
 
 	//starting square initial points
 	coord point[4];
@@ -178,7 +180,7 @@ void DrawFib()
 		counter++;//increment
 	}//while(under1)
 
-	zoomnum *= 0.96;//zoom speed
+	zoomnum *= speed;//zoom speed
 	if(zoomnum <= 0.14705882352)//if one square has become the same size as the next biggest of the same color
 	{
 		zoomnum = 1;// reset scale
@@ -186,6 +188,11 @@ void DrawFib()
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	//This is done so instead of infinitely increasing the size of a set number of squares, it increases the
 	//size to until it is smaller than that big decimal ((5/34) => square/next biggest of same color)
+	
+	if(choice == 3)
+	{
+		speed += 0.0001;
+	}//if crazy
 
 	glutSwapBuffers();//I do as sample code commands
 }//DrawFib
