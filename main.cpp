@@ -12,6 +12,7 @@ void input()
 	std::cout << "1. Zoom out" << std::endl;
 	std::cout << "2. Zoom in" << std::endl;
 	std::cout << "3. Crazy" << std::endl;
+	std::cout << "4. Inverse Crazy" << std::endl;
 	std::cin >> choice;
 }//input
 
@@ -93,7 +94,7 @@ void DrawFib()
 	{
 		minlength = 0.0005 * zoomnum;//side length of first triangle zoom in
 	}//if 1
-	else if (choice == 2 || choice == 3)
+	else if (choice == 2 || choice == 3 || choice == 4)
 	{
 		minlength = 0.0005 / zoomnum;//side length of first triangle zoom out
 	}//else if 2
@@ -180,7 +181,14 @@ void DrawFib()
 		counter++;//increment
 	}//while(under1)
 
-	zoomnum *= speed;//zoom speed
+	if(choice == 1|| choice == 2|| choice == 3)
+	{
+		zoomnum *= speed;
+	}//if choice 1 2 or 3
+	else if (choice == 4)
+	{
+		zoomnum /= speed;
+	}//else if choice 4
 	if(zoomnum <= 0.14705882352)//if one square has become the same size as the next biggest of the same color
 	{
 		zoomnum = 1;// reset scale
@@ -188,11 +196,8 @@ void DrawFib()
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	//This is done so instead of infinitely increasing the size of a set number of squares, it increases the
 	//size to until it is smaller than that big decimal ((5/34) => square/next biggest of same color)
-	
-	if(choice == 3)
-	{
-		speed += 0.0001;
-	}//if crazy
+
+	speed += 0.0001;
 
 	glutSwapBuffers();//I do as sample code commands
 }//DrawFib
