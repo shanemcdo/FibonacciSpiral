@@ -110,6 +110,7 @@ void DrawFib()
 
 	//starting sequence
 	double prevlength[3] = {0, minlength * 2, 0};
+	const double N = (1.2/15.0);
 	
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );//I do as the sample code says
 	while(under1(point))
@@ -119,7 +120,8 @@ void DrawFib()
 		//change position and size of square and also print curve
 		if(direction[counter%4] == 'l')
 		{
-			curve(point[3], point[0], point[1]);	
+			coord mid = {point[0].x - N * point[0].x, point[0].y - N * point[0].y};//this point is used to make the bezier curve look more like a quarter circle
+			curve(point[3], mid, point[1]);	
 			for(int i = 0; i < 4; i++)
 			{
 				point[i].x -= prevlength[1];
@@ -131,7 +133,8 @@ void DrawFib()
 		}//if r
 		else if(direction[counter%4] == 'd')
 		{
-			curve(point[0], point[1], point[2]);	
+			coord mid = {point[1].x - N * point[1].x, point[1].y - N * point[1].y};//this point is used to make the bezier curve look more like a quarter circle
+			curve(point[0], mid, point[2]);	
 			for(int i = 0; i < 4; i++)
 			{
 				point[i].y -= prevlength[1];
@@ -143,7 +146,8 @@ void DrawFib()
 		}//if d
 		else if(direction[counter%4] == 'r')
 		{
-			curve(point[1], point[2], point[3]);	
+			coord mid = {point[2].x + N * point[2].x, point[2].y - N * point[2].y};//this point is used to make the bezier curve look more like a quarter circle
+			curve(point[1], mid, point[3]);	
 			for(int i = 0; i < 4; i++)
 			{
 				point[i].x += prevlength[1];
@@ -155,7 +159,8 @@ void DrawFib()
 		}//if l
 		else if(direction[counter%4] == 'u')
 		{
-			curve(point[2], point[3], point[0]);	
+			coord mid = {point[3].x - N * point[3].x, point[3].y + N * point[3].y};//this point is used to make the bezier curve look more like a quarter circle
+			curve(point[2], mid, point[0]);	
 			for(int i = 0; i < 4; i++)
 			{
 				point[i].y += prevlength[1];
