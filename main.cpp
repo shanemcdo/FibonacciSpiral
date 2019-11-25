@@ -197,7 +197,9 @@ void DrawFib()
 	//This is done so instead of infinitely increasing the size of a set number of squares, it increases the
 	//size to until it is smaller than that big decimal ((5/34) => square/next biggest of same color)
 
-	speed += 0.0001;
+
+	if(choice == 3 || choice == 4)
+		speed += 0.0001;
 
 	glutSwapBuffers();//I do as sample code commands
 }//DrawFib
