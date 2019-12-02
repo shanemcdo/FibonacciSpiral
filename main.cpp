@@ -21,11 +21,8 @@ struct color
 color grad;
 color invgrad;
 
-void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//print 4 lines in a quadralateral corrioding to the 4 points
+void ColorSel(char dir)
 {
-	
-
-
 	if(colorchoice == 's')
 	{
 		color c[4] =
@@ -86,8 +83,14 @@ void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//
 				flip = true;
 			}// if == 1
 		}//else
-
 	}//else if grayscale
+}//ColorSel
+
+void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//print 4 lines in a quadralateral corrioding to the 4 points
+{
+	
+
+	ColorSel(dir);
 
 	glBegin(GL_QUADS);//print colored quad
 		glVertex2d(point1.x, point1.y);
