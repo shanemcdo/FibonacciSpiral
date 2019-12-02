@@ -47,7 +47,7 @@ void ColorSel(int count)
 			glColor3f(c[3].num[0], c[3].num[1], c[3].num[2]);//color 4
 		}//if u
 	}//if steel ball run
-	else if (colorchoice = 'g')
+	else if (colorchoice == 'g')
 	{
 		if(direction[count % 4] == 'l'|| direction[count % 4] == 'r')
 		{
@@ -80,7 +80,7 @@ void ColorSel(int count)
 			}// if == 1
 		}//else
 	}//else if grayscale
-	else if (colorchoice = 'r')
+	else if (colorchoice == 'r')
 	{
 		if(count % 3 == 0)
 		{
@@ -95,7 +95,6 @@ void ColorSel(int count)
 			glColor3f(c[2].num[0], c[2].num[1], c[2].num[2]);//color 1
 		}//else if 3
 	}//else if rainbow
-
 }//ColorSel
 
 void HolQuad(coord point1, coord point2, coord point3, coord point4, int count)//print 4 lines in a quadralateral corrioding to the 4 points
