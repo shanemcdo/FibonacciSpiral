@@ -12,6 +12,7 @@ double speed = 0.96;
 int choice = 1;
 char colorchoice = 's';
 bool flip = false;
+char direction[4] = {'l','d','r','u'};//uses counter to tell direction
 
 struct color
 {
@@ -19,7 +20,7 @@ struct color
 };
 color c[4];
 
-void ColorSel(char dir)
+void ColorSel(int count)
 {
 	if(colorchoice == 's')
 	{
@@ -29,30 +30,30 @@ void ColorSel(char dir)
 		c[3] = {1.0f, 0.843f, 0.2f};//color 4
 
 		//change color (R,G,B) values
-		if(dir == 'l')
+		if(direction[count % 4] == 'l')
 		{
 			glColor3f(c[0].num[0], c[0].num[1], c[0].num[2]);//color 1
 		}//if r
-		else if(dir == 'd')
+		else if(direction[count % 4] == 'd')
 		{
 			glColor3f(c[1].num[0], c[1].num[1], c[1].num[2]);//color 2
 		}//if d
-		else if(dir == 'r')
+		else if(direction[count % 4] == 'r')
 		{
 			glColor3f(c[2].num[0], c[2].num[1], c[2].num[2]);//color 3
 		}//if l
-		else if(dir == 'u')
+		else if(direction[count % 4] == 'u')
 		{
 			glColor3f(c[3].num[0], c[3].num[1], c[3].num[2]);//color 4
 		}//if u
 	}//if steel ball run
 	else if (colorchoice = 'g')
 	{
-		if(dir == 'l'|| dir == 'r')
+		if(direction[count % 4] == 'l'|| direction[count % 4] == 'r')
 		{
 			glColor3f(c[0].num[0], c[0].num[1], c[0].num[2]);//color 1
 		}//if r
-		else if(dir == 'd' || dir == 'u')
+		else if(direction[count % 4] == 'd' || direction[count % 4] == 'u')
 		{
 			glColor3f(c[1].num[0], c[1].num[1], c[1].num[2]);//color 2
 		}//if d
@@ -79,14 +80,29 @@ void ColorSel(char dir)
 			}// if == 1
 		}//else
 	}//else if grayscale
+	else if (colorchoice = 'r')
+	{
+		if(count % 3 == 0)
+		{
+			glColor3f(c[0].num[0], c[0].num[1], c[0].num[2]);//color 1
+		}//if 1
+		else if (count % 3 == 1)
+		{
+			glColor3f(c[1].num[0], c[1].num[1], c[1].num[2]);//color 1
+		}//else if 2
+		else if (count % 3 == 2)
+		{
+			glColor3f(c[2].num[0], c[2].num[1], c[2].num[2]);//color 1
+		}//else if 3
+	}//else if rainbow
 
 }//ColorSel
 
-void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//print 4 lines in a quadralateral corrioding to the 4 points
+void HolQuad(coord point1, coord point2, coord point3, coord point4, int count)//print 4 lines in a quadralateral corrioding to the 4 points
 {
 	
 
-	ColorSel(dir);
+	ColorSel(count);
 
 	glBegin(GL_QUADS);//print colored quad
 		glVertex2d(point1.x, point1.y);
@@ -128,8 +144,7 @@ return false;
 void DrawFib()
 {
 	double minlength;
-	int counter = 0;//used to determine direction
-	char direction[4] = {'l','d','r','u'};//uses counter to tell direction
+	int counter = 1;//used to determine direction
 
 	if(choice == 1)
 	{
@@ -158,7 +173,7 @@ void DrawFib()
 	
 	while(under1(point))
 	{
-		HolQuad(point[0], point[1], point[2], point[3], direction[counter % 4]);
+		HolQuad(point[0], point[1], point[2], point[3],counter);
 		
 		//change position and size of square and also print curve
 		if(direction[counter%4] == 'l')
@@ -288,6 +303,13 @@ void kbin (unsigned char key, int x, int y)
 		c[0] = {0, 0, 1};
 		c[1] = {0, 1, 0};
 	}//else if g
+	else if (key == 'r')
+	{
+		colorchoice = 'r';
+		c[0] = {1, 0, 0};
+		c[1] = {0, 1, 0};
+		c[2] = {0, 0, 1};
+	}//else if g
 }//kbin 
 
 int main(int argc, char *argv[])
@@ -310,4 +332,3 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
-
