@@ -17,21 +17,16 @@ struct color
 {
 	float num[3];
 };
-
-color grad;
-color invgrad;
+color c[4];
 
 void ColorSel(char dir)
 {
 	if(colorchoice == 's')
 	{
-		color c[4] =
-		{
-			{0.486f, 0.988f, 0.0f},//color 1
-			{0.118f, 0.565f, 1.0f},//color 2
-			{1.0f, 0.0f, 1.0f},//color 3
-			{1.0f, 0.843f, 0.2f},//color 4
-		};
+		c[0] = {0.486f, 0.988f, 0.0f};//color 1
+		c[1] = {0.118f, 0.565f, 1.0f};//color 2
+		c[2] = {1.0f, 0.0f, 1.0f};//color 3
+		c[3] = {1.0f, 0.843f, 0.2f};//color 4
 
 		//change color (R,G,B) values
 		if(dir == 'l')
@@ -55,35 +50,36 @@ void ColorSel(char dir)
 	{
 		if(dir == 'l'|| dir == 'r')
 		{
-			glColor3f(grad.num[0], grad.num[1], grad.num[2]);//color 1
+			glColor3f(c[0].num[0], c[0].num[1], c[0].num[2]);//color 1
 		}//if r
 		else if(dir == 'd' || dir == 'u')
 		{
-			glColor3f(invgrad.num[0], invgrad.num[1], invgrad.num[2]);//color 2
+			glColor3f(c[1].num[0], c[1].num[1], c[1].num[2]);//color 2
 		}//if d
 		if(flip)
 		{
-			grad.num[1] -= 0.000001;
-			grad.num[2] += 0.000001;
-			invgrad.num[1] += 0.000001;
-			invgrad.num[2] -= 0.000001;
-			if(grad.num[1] <= 0)
+			c[0].num[1] -= 0.000001;
+			c[0].num[2] += 0.000001;
+			c[1].num[1] += 0.000001;
+			c[1].num[2] -= 0.000001;
+			if(c[0].num[1] <= 0)
 			{
 				flip = false;
 			}// if == 0
 		}//if flip
 		else
 		{
-			grad.num[1] += 0.000001;
-			grad.num[2] -= 0.000001;
-			invgrad.num[1] -= 0.000001;
-			invgrad.num[2] += 0.000001;
-			if(grad.num[1] >= 1)
+			c[0].num[1] += 0.000001;
+			c[0].num[2] -= 0.000001;
+			c[1].num[1] -= 0.000001;
+			c[1].num[2] += 0.000001;
+			if(c[0].num[1] >= 1)
 			{
 				flip = true;
 			}// if == 1
 		}//else
 	}//else if grayscale
+
 }//ColorSel
 
 void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//print 4 lines in a quadralateral corrioding to the 4 points
@@ -289,8 +285,8 @@ void kbin (unsigned char key, int x, int y)
 	else if (key == 'g')
 	{
 		colorchoice = 'g';
-		grad = {0, 0, 1};
-		invgrad = {0, 1, 0};
+		c[0] = {0, 0, 1};
+		c[1] = {0, 1, 0};
 	}//else if g
 }//kbin 
 
