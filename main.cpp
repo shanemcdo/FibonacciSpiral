@@ -3,49 +3,91 @@
 #include<math.h>
 #include"curve.h"
 
-//////////////////////////////////////////////
+///////////////////////////////
 //TODO: add changable colors //
-//////////////////////////////////////////////
+///////////////////////////////
 
 double zoomnum = 1;//how zoomed in it is. ya know.
-int choice = 1;
 double speed = 0.96;
+int choice = 1;
+char colorchoice = 's';
+bool flip = false;
 
 struct color
 {
 	float num[3];
 };
 
+color grad;
+color invgrad;
+
 void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//print 4 lines in a quadralateral corrioding to the 4 points
 {
 	
 
-	color c[4] =
-	{
-		{0.486f, 0.988f, 0.0f},//color 1
-		{0.118f, 0.565f, 1.0f},//color 2
-		{1.0f, 0.0f, 1.0f},//color 3
-		{1.0f, 0.843f, 0.2f},//color 4
-	};
 
-	//change color (R,G,B) values
-	if(dir == 'l')
+	if(colorchoice == 's')
 	{
-		glColor3f(c[0].num[0], c[0].num[1], c[0].num[2]);//color 1
-	}//if r
-	else if(dir == 'd')
-	{
-		glColor3f(c[1].num[0], c[1].num[1], c[1].num[2]);//color 2
-	}//if d
-	else if(dir == 'r')
-	{
-		glColor3f(c[2].num[0], c[2].num[1], c[2].num[2]);//color 3
-	}//if l
-	else if(dir == 'u')
-	{
-		glColor3f(c[3].num[0], c[3].num[1], c[3].num[2]);//color 4
-	}//if u
+		color c[4] =
+		{
+			{0.486f, 0.988f, 0.0f},//color 1
+			{0.118f, 0.565f, 1.0f},//color 2
+			{1.0f, 0.0f, 1.0f},//color 3
+			{1.0f, 0.843f, 0.2f},//color 4
+		};
 
+		//change color (R,G,B) values
+		if(dir == 'l')
+		{
+			glColor3f(c[0].num[0], c[0].num[1], c[0].num[2]);//color 1
+		}//if r
+		else if(dir == 'd')
+		{
+			glColor3f(c[1].num[0], c[1].num[1], c[1].num[2]);//color 2
+		}//if d
+		else if(dir == 'r')
+		{
+			glColor3f(c[2].num[0], c[2].num[1], c[2].num[2]);//color 3
+		}//if l
+		else if(dir == 'u')
+		{
+			glColor3f(c[3].num[0], c[3].num[1], c[3].num[2]);//color 4
+		}//if u
+	}//if steel ball run
+	else if (colorchoice = 'g')
+	{
+		if(dir == 'l'|| dir == 'r')
+		{
+			glColor3f(grad.num[0], grad.num[1], grad.num[2]);//color 1
+		}//if r
+		else if(dir == 'd' || dir == 'u')
+		{
+			glColor3f(invgrad.num[0], invgrad.num[1], invgrad.num[2]);//color 2
+		}//if d
+		if(flip)
+		{
+			grad.num[1] -= 0.000001;
+			grad.num[2] += 0.000001;
+			invgrad.num[1] += 0.000001;
+			invgrad.num[2] -= 0.000001;
+			if(grad.num[1] <= 0)
+			{
+				flip = false;
+			}// if == 0
+		}//if flip
+		else
+		{
+			grad.num[1] += 0.000001;
+			grad.num[2] -= 0.000001;
+			invgrad.num[1] -= 0.000001;
+			invgrad.num[2] += 0.000001;
+			if(grad.num[1] >= 1)
+			{
+				flip = true;
+			}// if == 1
+		}//else
+
+	}//else if grayscale
 
 	glBegin(GL_QUADS);//print colored quad
 		glVertex2d(point1.x, point1.y);
@@ -237,6 +279,16 @@ void kbin (unsigned char key, int x, int y)
 		speed = 0.96;
 		zoomnum = 1;
 	}//else if 4
+	else if (key == 's')
+	{
+		colorchoice = 's';
+	}//else if s
+	else if (key == 'g')
+	{
+		colorchoice = 'g';
+		grad = {0, 0, 1};
+		invgrad = {0, 1, 0};
+	}//else if g
 }//kbin 
 
 int main(int argc, char *argv[])
@@ -252,9 +304,6 @@ int main(int argc, char *argv[])
 	glutDisplayFunc(display);
 	glutKeyboardFunc(kbin);
 	glutIdleFunc(display);
-
-//	glutDisplayFunc(temp);
-//	glutIdleFunc(temp);
 
 	//loop
 	glutMainLoop();
