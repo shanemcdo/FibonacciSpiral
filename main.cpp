@@ -13,6 +13,7 @@ int choice = 1;
 char colorchoice = 's';
 bool flip = false;
 char direction[4] = {'l','d','r','u'};//uses counter to tell direction
+bool pause = false;
 
 struct color
 {
@@ -235,21 +236,28 @@ void DrawFib()
 		counter++;//increment
 	}//while(under1)
 
-	if(choice == 1|| choice == 2|| choice == 3)
+	if(!pause)
 	{
-		zoomnum *= speed;
-	}//if choice 1 2 or 3
-	else if (choice == 4)
-	{
-		zoomnum /= speed;
-	}//else if choice 4
-	if(zoomnum <= 0.14705882352)//if one square has become the same size as the next biggest of the same color
+		if(choice == 1|| choice == 2|| choice == 3)
+		{
+			zoomnum *= speed;
+		}//if choice 1 2 or 3
+		else if (choice == 4)
+		{
+			zoomnum /= speed;
+		}//else if choice 4
+	}//pause
+
+	if(zoomnum <= 0.14705882352 && colorchoice != 'r')//if one square has become the same size as the next biggest of the same color
 	{
 		zoomnum = 1;// reset scale
 	}//if
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	//This is done so instead of infinitely increasing the size of a set number of squares, it increases the
 	//size to until it is smaller than that big decimal ((5/34) => square/next biggest of same color)
+	else
+	{
+	}//else if
 
 
 	if(choice == 3 || choice == 4)
@@ -309,6 +317,11 @@ void kbin (unsigned char key, int x, int y)
 		c[1] = {0, 1, 0};
 		c[2] = {0, 0, 1};
 	}//else if g
+	else if (key == 'p')
+	{
+		if(pause) pause = false;
+		else pause = true;
+	}//else if p
 }//kbin 
 
 int main(int argc, char *argv[])
