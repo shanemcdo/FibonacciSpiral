@@ -4,18 +4,9 @@
 #include"curve.h"
 
 double zoomnum = 1;//how zoomed in it is. ya know.
-int choice;
+int choice = 1;
 double speed = 0.96;
 
-void input()
-{
-	std::cout << std::endl << "Fibonacci Spiral" << std::endl;
-	std::cout << "1. Zoom out" << std::endl;
-	std::cout << "2. Zoom in" << std::endl;
-	std::cout << "3. Crazy" << std::endl;
-	std::cout << "4. Inverse Crazy" << std::endl;
-	std::cin >> choice;
-}//input
 
 void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//print 4 lines in a quadralateral corrioding to the 4 points
 {
@@ -203,10 +194,33 @@ void display()
 
 	glutSwapBuffers();//I do as sample code commands
 }//display
+
+void kbin (unsigned char key, int x, int y)
+{
+	if (key == '1')
+	{
+		choice = 1;
+		speed = 0.96;
+	}//if 1
+	else if (key == '2')
+	{
+		choice = 2;
+		speed = 0.96;
+	}//else if 2
+	else if (key == '3')
+	{
+		choice = 3;
+		speed = 0.96;
+	}//else if 3
+	else if (key == '4')
+	{
+		choice = 4;
+		speed = 0.96;
+	}//else if 4
+}//kbin 
+
 int main(int argc, char *argv[])
 {
-	input();
-
 	//initialize
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
@@ -216,6 +230,7 @@ int main(int argc, char *argv[])
 
 	//functions
 	glutDisplayFunc(display);
+	glutKeyboardFunc(kbin);
 	glutIdleFunc(display);
 
 //	glutDisplayFunc(temp);
