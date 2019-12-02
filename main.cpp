@@ -4,33 +4,46 @@
 #include"curve.h"
 
 //////////////////////////////////////////////
-//TODO: add changable colors using a struct //
+//TODO: add changable colors //
 //////////////////////////////////////////////
 
 double zoomnum = 1;//how zoomed in it is. ya know.
 int choice = 1;
 double speed = 0.96;
 
+struct color
+{
+	float num[3];
+};
+
 void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//print 4 lines in a quadralateral corrioding to the 4 points
 {
 	
 
+	color c[4] =
+	{
+		{0.486f, 0.988f, 0.0f},//color 1
+		{0.118f, 0.565f, 1.0f},//color 2
+		{1.0f, 0.0f, 1.0f},//color 3
+		{1.0f, 0.843f, 0.2f},//color 4
+	};
+
 	//change color (R,G,B) values
 	if(dir == 'l')
 	{
-		glColor3f(0.486f, 0.988f, 0.0f);//color 1
+		glColor3f(c[0].num[0], c[0].num[1], c[0].num[2]);//color 1
 	}//if r
 	else if(dir == 'd')
 	{
-		glColor3f(0.118f, 0.565f, 1.0f);//color 2
+		glColor3f(c[1].num[0], c[1].num[1], c[1].num[2]);//color 2
 	}//if d
 	else if(dir == 'r')
 	{
-		glColor3f(1.0f, 0.0f, 1.0f);//color 3
+		glColor3f(c[2].num[0], c[2].num[1], c[2].num[2]);//color 3
 	}//if l
 	else if(dir == 'u')
 	{
-		glColor3f(1.0f, 0.843f, 0.2f);//color 4
+		glColor3f(c[3].num[0], c[3].num[1], c[3].num[2]);//color 4
 	}//if u
 
 
