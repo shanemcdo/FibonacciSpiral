@@ -3,10 +3,13 @@
 #include<math.h>
 #include"curve.h"
 
+//////////////////////////////////////////////
+//TODO: add changable colors using a struct //
+//////////////////////////////////////////////
+
 double zoomnum = 1;//how zoomed in it is. ya know.
 int choice = 1;
 double speed = 0.96;
-
 
 void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//print 4 lines in a quadralateral corrioding to the 4 points
 {
@@ -201,21 +204,25 @@ void kbin (unsigned char key, int x, int y)
 	{
 		choice = 1;
 		speed = 0.96;
+		zoomnum = 1;
 	}//if 1
 	else if (key == '2')
 	{
 		choice = 2;
 		speed = 0.96;
+		zoomnum = 1;
 	}//else if 2
 	else if (key == '3')
 	{
 		choice = 3;
 		speed = 0.96;
+		zoomnum = 1;
 	}//else if 3
 	else if (key == '4')
 	{
 		choice = 4;
 		speed = 0.96;
+		zoomnum = 1;
 	}//else if 4
 }//kbin 
 
