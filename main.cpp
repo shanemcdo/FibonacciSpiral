@@ -100,8 +100,6 @@ void ColorSel(int count)
 
 void HolQuad(coord point1, coord point2, coord point3, coord point4, int count)//print 4 lines in a quadralateral corrioding to the 4 points
 {
-	
-
 	ColorSel(count);
 
 	glBegin(GL_QUADS);//print colored quad
@@ -255,8 +253,9 @@ void DrawFib()
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	//This is done so instead of infinitely increasing the size of a set number of squares, it increases the
 	//size to until it is smaller than that big decimal ((5/34) => square/next biggest of same color)
-	else
+	else if (zoomnum <= 13.0/55.0/70 && colorchoice == 'r')//i don't even understand anything anymore
 	{
+		zoomnum = 1;//reset scale
 	}//else if
 
 
