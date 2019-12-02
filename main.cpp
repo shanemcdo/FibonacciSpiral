@@ -1,6 +1,7 @@
 #include<GL/glut.h>
 #include<iostream>
 #include<math.h>
+#include"curve.h"
 
 double zoomnum = 1;//how zoomed in it is. ya know.
 int choice;
@@ -15,14 +16,6 @@ void input()
 	std::cout << "4. Inverse Crazy" << std::endl;
 	std::cin >> choice;
 }//input
-
-struct coord{//literally the simplest struct.
-	double x;
-	double y;
-};
-
-void curve(coord p0, coord p1, coord p2);
-void temp();
 
 void HolQuad(coord point1, coord point2, coord point3, coord point4, char dir)//print 4 lines in a quadralateral corrioding to the 4 points
 {
@@ -115,7 +108,6 @@ void DrawFib()
 	double prevlength[3] = {0, minlength * 2, 0};
 	const double N = (1.2/15.0);
 	
-	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );//I do as the sample code says
 	while(under1(point))
 	{
 		HolQuad(point[0], point[1], point[2], point[3], direction[counter % 4]);
@@ -201,9 +193,16 @@ void DrawFib()
 	if(choice == 3 || choice == 4)
 		speed += 0.0001;
 
-	glutSwapBuffers();//I do as sample code commands
 }//DrawFib
 
+void display()
+{
+	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );//I do as the sample code says
+
+	DrawFib();
+
+	glutSwapBuffers();//I do as sample code commands
+}//display
 int main(int argc, char *argv[])
 {
 	input();
@@ -216,8 +215,8 @@ int main(int argc, char *argv[])
 	glutCreateWindow( "Fibonacci Spiral" );
 
 	//functions
-	glutDisplayFunc(DrawFib);
-	glutIdleFunc(DrawFib);
+	glutDisplayFunc(display);
+	glutIdleFunc(display);
 
 //	glutDisplayFunc(temp);
 //	glutIdleFunc(temp);

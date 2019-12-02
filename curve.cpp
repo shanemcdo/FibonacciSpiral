@@ -1,12 +1,7 @@
 #include<GL/glut.h>
 #include<iostream>
 #include<math.h>
-
-struct coord{//literally the simplest struct.
-	double x;
-	double y;
-};
-
+#include"curve.h"
 
 void curve(coord p0, coord p1, coord p2)//p1 is angle p0 and p2 are ends
 {
