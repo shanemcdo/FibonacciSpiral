@@ -81,7 +81,7 @@ void ColorSel(int count)
 			}//else
 		}//if !pause
 	}//else if gradient
-	else if (colorchoice == 'r') //if rainbow is selected
+	else if (colorchoice == 'r' || colorchoice == 't') //if tri-color is selected
 	{
 		if(count % 3 == 0)
 		{
@@ -95,7 +95,7 @@ void ColorSel(int count)
 		{
 			glColor3f(c[2].num[0], c[2].num[1], c[2].num[2]);//color 1
 		}//else if 3
-	}//else if rainbow
+	}//else if tricolor
 	else //default 4 color variant
 	{
 		if(colorchoice == 's')
@@ -278,14 +278,14 @@ void DrawFib()
 		}//else if choice 4
 	}//pause
 
-	if(zoomnum <= 0.14705882352 && colorchoice != 'r')//if one square has become the same size as the next biggest of the same color
+	if(zoomnum <= 0.14705882352 && colorchoice != 'r' && colorchoice != 't')//if one square has become the same size as the next biggest of the same color
 	{
 		zoomnum = 1;// reset scale
 	}//if
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	//This is done so instead of infinitely increasing the size of a set number of squares, it increases the
 	//size to until it is smaller than that big decimal ((5/34) => square/next biggest of same color)
-	else if (zoomnum <= 13.0/55.0/70 && colorchoice == 'r')//i don't even understand anything anymore
+	else if (zoomnum <= 13.0/55.0/70 && (colorchoice == 'r' || colorchoice == 't'))//i don't even understand anything anymore
 	{
 		zoomnum = 1;//reset scale
 	}//else if
@@ -353,7 +353,14 @@ void kbin (unsigned char key, int x, int y)
 		colorchoice = 'b';
 		c[0] = {1, 1, 1};
 		c[1] = {0, 0, 0};
-	}
+	}//else if b
+	else if(key == 't')
+	{
+		colorchoice = 't';
+		c[0] = {0, 0.502, 0.502};
+		c[1] = {0, 1, 1};
+		c[2] = {0.125, 0.698, 0.667};
+	}//else if t
 	else if (key == 'p')
 	{
 		if(pause) pause = false;

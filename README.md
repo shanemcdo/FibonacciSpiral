@@ -8,7 +8,8 @@ CONTROLS:
 	3 : crazy out
 	4 : crazy in
 	s : steel ball run colors
-	r : rainbow colors
+	r : tricolor rainbow 
 	g : green and blue gradient colors
 	b : black and white gradient colors
+	t : tricolor blueish
 	p : pause
