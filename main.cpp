@@ -3,10 +3,6 @@
 #include<math.h>
 #include"curve.h"
 
-///////////////////////////////
-//TODO: add changable colors //
-///////////////////////////////
-
 double zoomnum = 1;//how zoomed in it is. ya know.
 double speed = 0.96;
 int choice = 1;
@@ -23,12 +19,89 @@ color c[4];
 
 void ColorSel(int count)
 {
-	if(colorchoice == 's')
+	if (colorchoice == 'g'||colorchoice == 'b') //if gradient is selected
 	{
-		c[0] = {0.486f, 0.988f, 0.0f};//color 1
-		c[1] = {0.118f, 0.565f, 1.0f};//color 2
-		c[2] = {1.0f, 0.0f, 1.0f};//color 3
-		c[3] = {1.0f, 0.843f, 0.2f};//color 4
+		if(direction[count % 4] == 'l'|| direction[count % 4] == 'r')
+		{
+			glColor3f(c[0].num[0], c[0].num[1], c[0].num[2]);//color 1
+		}//if r
+		else if(direction[count % 4] == 'd' || direction[count % 4] == 'u')
+		{
+			glColor3f(c[1].num[0], c[1].num[1], c[1].num[2]);//color 2
+		}//if d
+		if(flip)
+		{
+			if(colorchoice == 'g')//green and blue
+			{
+				c[0].num[1] -= 0.000001;
+				c[0].num[2] += 0.000001;
+				c[1].num[1] += 0.000001;
+				c[1].num[2] -= 0.000001;
+			}//color green and blue
+			else if(colorchoice == 'b')//black and white
+			{
+				c[0].num[0] -= 0.000001;
+				c[0].num[1] -= 0.000001;
+				c[0].num[2] -= 0.000001;
+				c[1].num[0] += 0.000001;
+				c[1].num[1] += 0.000001;
+				c[1].num[2] += 0.000001;
+			}//black and white
+
+			if(c[0].num[1] <= 0)
+			{
+				flip = false;
+			}// if == 0
+		}//if flip
+		else
+		{
+			if(colorchoice == 'g')
+			{
+				c[0].num[1] += 0.000001;
+				c[0].num[2] -= 0.000001;
+				c[1].num[1] -= 0.000001;
+				c[1].num[2] += 0.000001;
+			}//color green and blue
+			else if(colorchoice == 'b')
+			{
+				c[0].num[0] += 0.000001;
+				c[0].num[1] += 0.000001;
+				c[0].num[2] += 0.000001;
+				c[1].num[0] -= 0.000001;
+				c[1].num[1] -= 0.000001;
+				c[1].num[2] -= 0.000001;
+			}//black and white
+
+			if(c[0].num[1] >= 1)
+			{
+				flip = true;
+			}// if == 1
+		}//else
+	}//else if gradient
+	else if (colorchoice == 'r') //if rainbow is selected
+	{
+		if(count % 3 == 0)
+		{
+			glColor3f(c[0].num[0], c[0].num[1], c[0].num[2]);//color 1
+		}//if 1
+		else if (count % 3 == 1)
+		{
+			glColor3f(c[1].num[0], c[1].num[1], c[1].num[2]);//color 1
+		}//else if 2
+		else if (count % 3 == 2)
+		{
+			glColor3f(c[2].num[0], c[2].num[1], c[2].num[2]);//color 1
+		}//else if 3
+	}//else if rainbow
+	else //default 4 color variant
+	{
+		if(colorchoice == 's')
+		{
+			c[0] = {0.486f, 0.988f, 0.0f};//color 1
+			c[1] = {0.118f, 0.565f, 1.0f};//color 2
+			c[2] = {1.0f, 0.0f, 1.0f};//color 3
+			c[3] = {1.0f, 0.843f, 0.2f};//color 4
+		}//if steel ball run
 
 		//change color (R,G,B) values
 		if(direction[count % 4] == 'l')
@@ -47,55 +120,7 @@ void ColorSel(int count)
 		{
 			glColor3f(c[3].num[0], c[3].num[1], c[3].num[2]);//color 4
 		}//if u
-	}//if steel ball run
-	else if (colorchoice == 'g')
-	{
-		if(direction[count % 4] == 'l'|| direction[count % 4] == 'r')
-		{
-			glColor3f(c[0].num[0], c[0].num[1], c[0].num[2]);//color 1
-		}//if r
-		else if(direction[count % 4] == 'd' || direction[count % 4] == 'u')
-		{
-			glColor3f(c[1].num[0], c[1].num[1], c[1].num[2]);//color 2
-		}//if d
-		if(flip)
-		{
-			c[0].num[1] -= 0.000001;
-			c[0].num[2] += 0.000001;
-			c[1].num[1] += 0.000001;
-			c[1].num[2] -= 0.000001;
-			if(c[0].num[1] <= 0)
-			{
-				flip = false;
-			}// if == 0
-		}//if flip
-		else
-		{
-			c[0].num[1] += 0.000001;
-			c[0].num[2] -= 0.000001;
-			c[1].num[1] -= 0.000001;
-			c[1].num[2] += 0.000001;
-			if(c[0].num[1] >= 1)
-			{
-				flip = true;
-			}// if == 1
-		}//else
-	}//else if grayscale
-	else if (colorchoice == 'r')
-	{
-		if(count % 3 == 0)
-		{
-			glColor3f(c[0].num[0], c[0].num[1], c[0].num[2]);//color 1
-		}//if 1
-		else if (count % 3 == 1)
-		{
-			glColor3f(c[1].num[0], c[1].num[1], c[1].num[2]);//color 1
-		}//else if 2
-		else if (count % 3 == 2)
-		{
-			glColor3f(c[2].num[0], c[2].num[1], c[2].num[2]);//color 1
-		}//else if 3
-	}//else if rainbow
+	}//else default 4 color varient
 }//ColorSel
 
 void HolQuad(coord point1, coord point2, coord point3, coord point4, int count)//print 4 lines in a quadralateral corrioding to the 4 points
@@ -320,6 +345,12 @@ void kbin (unsigned char key, int x, int y)
 		c[1] = {0, 1, 0};
 		c[2] = {0, 0, 1};
 	}//else if g
+	else if (key == 'b')
+	{
+		colorchoice = 'b';
+		c[0] = {1, 1, 1};
+		c[1] = {0, 0, 0};
+	}
 	else if (key == 'p')
 	{
 		if(pause) pause = false;
