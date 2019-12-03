@@ -13,3 +13,4 @@ CONTROLS:
 	b : black and white gradient colors
 	t : tricolor blueish
 	p : pause
+	q : quit

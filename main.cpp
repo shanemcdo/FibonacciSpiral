@@ -366,6 +366,10 @@ void kbin (unsigned char key, int x, int y)
 		if(pause) pause = false;
 		else pause = true;
 	}//else if p
+	else if (key == 'q')//quit
+	{
+		exit(0);
+	}//else if q
 }//kbin 
 
 int main(int argc, char *argv[])
