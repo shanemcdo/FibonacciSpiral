@@ -9,4 +9,6 @@ CONTROLS:
 	4 : crazy in
 	s : steel ball run colors
 	r : rainbow colors
-	g : gradient colors
+	g : green and blue gradient colors
+	b : black and white gradient colors
+	p : pause

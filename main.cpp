@@ -29,54 +29,57 @@ void ColorSel(int count)
 		{
 			glColor3f(c[1].num[0], c[1].num[1], c[1].num[2]);//color 2
 		}//if d
-		if(flip)
+		if(!pause)//also pauses the gradient from moving when paused
 		{
-			if(colorchoice == 'g')//green and blue
+			if(flip)
 			{
-				c[0].num[1] -= 0.000001;
-				c[0].num[2] += 0.000001;
-				c[1].num[1] += 0.000001;
-				c[1].num[2] -= 0.000001;
-			}//color green and blue
-			else if(colorchoice == 'b')//black and white
-			{
-				c[0].num[0] -= 0.000001;
-				c[0].num[1] -= 0.000001;
-				c[0].num[2] -= 0.000001;
-				c[1].num[0] += 0.000001;
-				c[1].num[1] += 0.000001;
-				c[1].num[2] += 0.000001;
-			}//black and white
+				if(colorchoice == 'g')//green and blue
+				{
+					c[0].num[1] -= 0.000001;
+					c[0].num[2] += 0.000001;
+					c[1].num[1] += 0.000001;
+					c[1].num[2] -= 0.000001;
+				}//color green and blue
+				else if(colorchoice == 'b')//black and white
+				{
+					c[0].num[0] -= 0.000001;
+					c[0].num[1] -= 0.000001;
+					c[0].num[2] -= 0.000001;
+					c[1].num[0] += 0.000001;
+					c[1].num[1] += 0.000001;
+					c[1].num[2] += 0.000001;
+				}//black and white
 
-			if(c[0].num[1] <= 0)
+				if(c[0].num[1] <= 0)
+				{
+					flip = false;
+				}// if == 0
+			}//if flip
+			else
 			{
-				flip = false;
-			}// if == 0
-		}//if flip
-		else
-		{
-			if(colorchoice == 'g')
-			{
-				c[0].num[1] += 0.000001;
-				c[0].num[2] -= 0.000001;
-				c[1].num[1] -= 0.000001;
-				c[1].num[2] += 0.000001;
-			}//color green and blue
-			else if(colorchoice == 'b')
-			{
-				c[0].num[0] += 0.000001;
-				c[0].num[1] += 0.000001;
-				c[0].num[2] += 0.000001;
-				c[1].num[0] -= 0.000001;
-				c[1].num[1] -= 0.000001;
-				c[1].num[2] -= 0.000001;
-			}//black and white
+				if(colorchoice == 'g')
+				{
+					c[0].num[1] += 0.000001;
+					c[0].num[2] -= 0.000001;
+					c[1].num[1] -= 0.000001;
+					c[1].num[2] += 0.000001;
+				}//color green and blue
+				else if(colorchoice == 'b')
+				{
+					c[0].num[0] += 0.000001;
+					c[0].num[1] += 0.000001;
+					c[0].num[2] += 0.000001;
+					c[1].num[0] -= 0.000001;
+					c[1].num[1] -= 0.000001;
+					c[1].num[2] -= 0.000001;
+				}//black and white
 
-			if(c[0].num[1] >= 1)
-			{
-				flip = true;
-			}// if == 1
-		}//else
+				if(c[0].num[1] >= 1)
+				{
+					flip = true;
+				}// if == 1
+			}//else
+		}//if !pause
 	}//else if gradient
 	else if (colorchoice == 'r') //if rainbow is selected
 	{
