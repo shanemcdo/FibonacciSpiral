@@ -176,7 +176,7 @@ void DrawFib()
 	{
 		minlength = 0.0005 * zoomnum;//side length of first triangle zoom in
 	}//if 1
-	else if(choice == 4 && colorchoice == 'r')
+	else if(choice == 4 && (colorchoice == 'r'|| colorchoice == 't'))
 	{
 		minlength = 0.0000005 / zoomnum;//side length of first triangle zoom out
 	}//else if 
