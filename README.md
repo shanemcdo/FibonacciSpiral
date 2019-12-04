@@ -3,14 +3,25 @@ I created this program to display the Fibonacci spiral expanding. I got the idea
 Originally, I was going to use the formula of a quarter circle y = sqrt(r^2 - x^2). BUTTT that died. It might work, but there was no way i was gonna figure it out. so I used the formula for a quadratic bezier curve, and that worked instantly. I'm mad I didn't do that earler.
 The default colors are based off of Jojo's Bizzare Adventure Steel Ball Run.
 CONTROLS:
+
 	1 : zoom out
+
 	2 : zoom in
+
 	3 : crazy out
+
 	4 : crazy in
+
 	s : steel ball run colors
+
 	r : tricolor rainbow 
+
 	g : green and blue gradient colors
+
 	b : black and white gradient colors
+
 	t : tricolor blueish
+
 	p : pause
+
 	q : quit
