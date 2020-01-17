@@ -17,6 +17,20 @@ struct color
 };
 color c[4];
 
+void print_controls(){
+	std::cout << "1 : zoom out" << std::endl;
+	std::cout << "2 : zoom in" << std::endl;
+	std::cout << "3 : crazy out" << std::endl;
+	std::cout << "4 : crazy in" << std::endl;
+	std::cout << "s : steel ball run colors" << std::endl;
+	std::cout << "r : tricolor rainbow " << std::endl;
+	std::cout << "g : green and blue gradient colors" << std::endl;
+	std::cout << "b : black and white gradient colors" << std::endl;
+	std::cout << "t : tricolor blueish" << std::endl;
+	std::cout << "p : pause" << std::endl;
+	std::cout << "q : quit" << std::endl;
+}
+
 void ColorSel(int count)
 {
 	if (colorchoice == 'g'||colorchoice == 'b') //if gradient is selected
@@ -380,6 +394,9 @@ int main(int argc, char *argv[])
 	glutInitWindowPosition ( 0, 0 ) ;
 	glutInitWindowSize ( 675, 675 ) ;
 	glutCreateWindow( "Fibonacci Spiral" );
+
+	//console screen
+	print_controls();
 
 	//functions
 	glutDisplayFunc(display);
